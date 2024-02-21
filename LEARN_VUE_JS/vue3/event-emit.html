@@ -1,0 +1,32 @@
+<div id="app">
+    <!--<app-contents v-on : 이벤트이름 = "상위컴포넌트의 메소드 이름"></app-contents> -->
+    <app-contents v-on:refresh = "showAlert"></app-contents>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    var appContents = {
+        template: `
+            <p>
+                <button v-on:click="sendEvent">갱신</button> 
+            </p> 
+        ` // 백틱 -> 자바스크립트 문법, 여러 줄을 한줄에 처리하기 위함, 데이터도 넣어서 처리할 수 있음 ${variable} 형식으로 가능 
+        ,methods: {
+            sendEvent(){
+                this.$emit('refresh');//하위에서 root로 쏘아 올리는 이벤트
+            }
+        }
+    }
+
+    Vue.createApp({ // root component
+        methods: {
+            showAlert(){
+                alert('새로고침');
+            }
+        },
+
+        components: { 
+            'app-contents': appContents
+        }
+    }).mount('#app');
+</script>

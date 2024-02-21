@@ -1,0 +1,55 @@
+<div id="app">
+    <!-- contents에서 header로 통신하려면 contents에서 root로 이벤트를 호출시키고, root에서 header로 데이터를 내려야 함-->
+<app-header v-bind:app-Title="message"></app-header>
+<app-contents v-on:login="receive"></app-contents>
+
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+
+ var appHeader = {
+    props: ['appTitle'], //appTitle 라는 값을 컴포넌트에 bind로 묶어주면 됨
+                        //카멜케이스로 묶어서 만들었을 때 뷰에서 인식을 못할수도 있음, 개발자도구에서 확인하고 
+                        //대문자로 하고싶다면 태그에서는 하이픈-을 붙여주면 두번째 문자는 별도로 취급해서 대문자처리 됨
+    template:`
+        <h1>
+            {{ appTitle }}
+       </h1>
+    `
+    }
+
+
+ var appContents = {
+    template:`
+        <p>
+            <button v-on:click="sendEvent">로그인</button>
+       </p>
+    `,
+    methods:{
+        sendEvent(){
+            this.$emit('login');
+        }
+
+    }
+    }
+
+    Vue.createApp({
+        data(){
+            return{
+                message: ''
+            }
+        },
+        methods:{
+            receive(){
+                console.log('received');
+                this.message = 'logged on'; //메세지를 props로 내려서 header에 바인드해주기
+            }
+        },
+        components: {
+            'app-header': appHeader,
+            'app-contents': appContents
+        }
+    }).mount('#app');
+
+</script>

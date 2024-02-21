@@ -1,0 +1,21 @@
+<div id="app">
+    <p>{{ count }}</p>
+    <button v-on:click="addCount">+</button> //v-on 을 디렉티브라고 함, 메소드를 바인드
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    Vue.createApp({
+        data : function(){
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            addCount: function(){
+                this.count++;
+            }
+        }
+    }).mount('#app');
+
+</script>

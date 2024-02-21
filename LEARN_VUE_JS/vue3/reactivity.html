@@ -1,0 +1,31 @@
+<div id="app">
+
+    <!-- 렌더링 될 부분 -->
+</div>
+
+<script>
+
+    var data = {
+        message: 10
+    }
+
+    function render(sth){
+        var div = document.querySelector('#app'); //dom API
+        div.innerHTML = sth;
+    }
+
+   // render('hello vue');
+
+    var app = new Proxy(data, {
+        get(){
+            console.log('hi')
+        },
+
+        set(target, prop, newValue){
+            console.log('값 갱신')
+            target[prop] = newValue;
+            render(newValue);
+        }
+    })
+
+</script>
