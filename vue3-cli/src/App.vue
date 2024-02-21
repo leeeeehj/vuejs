@@ -1,26 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- root에서 하위 컴포넌트에서 데이터를 내려서, 표시하기(props 사용) -->
+  <AppHeader 
+  v-bind:appTitle ="message"
+  v-on:change ="changeMessage"></AppHeader>
+  
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppHeader from './components/AppHeader.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    components: { //import 후 컴포넌트 사용할 수 있도록 등록하기
+      //'AppHeader' : AppHeader // 전부 파스칼케이스로 작성 , 앞뒤가 같으면 한번만 작성해도 무관
+      AppHeader
+    },
+    data() {
+      return {
+        message: '앱 헤더 컴포넌트'
+      }
+    },methods:{
+      changeMessage(){
+        this.message = '변경됨'
+      }
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
