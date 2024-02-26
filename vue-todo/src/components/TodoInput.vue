@@ -15,10 +15,10 @@ export default {
         }
     },
     methods:{
+        //모든 기능을 app.vue 로 위임하고 emit만 사용하여 처리
         addTodo: function(){
             if (this.newTodoItem !== ''){
-                var obj = {completed: false, item:this.newTodoItem};
-                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+                this.$emit('addTodoItem',this.newTodoItem)
                 this.clearInput();
                 }
         },
