@@ -28,7 +28,6 @@ import { useTodo } from './hooks/useTodo';
 
       const {
         todoItems, 
-        fetchTodos, 
         addTodo , 
         removeTodo
       } = useTodo();
@@ -37,7 +36,6 @@ import { useTodo } from './hooks/useTodo';
       // lifecycle API 는 메인으로 빼주는 것이 구조적으로 좋다.
       onBeforeMount(()=> {
         console.log('onBeforeMount called');
-        todoItems.value = fetchTodos();
       })
 
 

@@ -8,15 +8,16 @@
 
 <script>
 import { ref } from 'vue'
+import { store } from '@/store/store';
     export default {
         //setup은 기본 파라미터로 props와 context를 받는다
-        setup(props, context){
+        setup(){
             //data
             const todoInput = ref('');
 
             function addTodo(){
                 //컴포지션에서 emit은 context에 담겨있다.
-                context.emit('add', todoInput.value);
+                store.commit('addOne', todoInput);
                 clearTodo();
             }
 

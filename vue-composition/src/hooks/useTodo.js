@@ -4,17 +4,6 @@ function useTodo () {
     
     const todoItems = ref([]);
 
-    //methods
-    function fetchTodos(){
-      const result = [];
-        for(let i = 0; i<localStorage.length; i++){
-            const todoItem = localStorage.key(i);
-            //value 로 접근해야하는 것이 composition의 유의점!
-            //todoItems.value.push(todoItem);
-            result.push(todoItem);
-        }
-        return result;
-    }
 
 
     function addTodo(todo){
@@ -30,6 +19,6 @@ function useTodo () {
         localStorage.removeItem(item);
     }
  
-      return {todoItems, fetchTodos, addTodo , removeTodo}
+      return {todoItems, addTodo , removeTodo}
 }
 export { useTodo }

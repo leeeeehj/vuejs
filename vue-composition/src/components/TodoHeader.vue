@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1>{{ appTitle }}</h1>
-        <h4>{{  newTitle }}</h4>
+        <h1>{{ this.$store.state.headerText}}</h1>
     </div>
 </template>
 
