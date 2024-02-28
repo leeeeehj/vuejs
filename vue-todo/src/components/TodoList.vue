@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- ul>li*3 과 같이 축약어로 생성 가능함 -->
-    <ul>
-        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
+    <transition-group name = "list" tag ="ul">
+        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow list-enter-active">
             <i class="checkBtn fa-solid fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
             <!-- v-bind 로 동적바인딩해줄수 있음(completed가 true 되는 순간 textCompleted class로 변경) -->
             <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
             <span class="removeBtn" @click="removeTodo(todoItem, index)"><i class="fa-solid fa-trash" ></i></span>
         </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -62,5 +62,13 @@ li {
 .textCompleted{
     text-decoration: line-through;
     color: #b3adad;
+}
+
+.list-enter-active, .list-leave-active{
+    transition : all 1s;
+}
+.list-enter, .list-leave-to{
+    opacity : 0;
+    transform: translateY(30px);
 }
 </style>
